@@ -118,11 +118,7 @@ module.exports = class ReadWriteLock {
   }
 
   _bump() {
-    if (
-      this.write.writing === false &&
-      this.read.readers === 0 &&
-      this.write._waiting.length > 0
-    ) {
+    if (this.write.writing === false && this.read.readers === 0 && this.write._waiting.length > 0) {
       this.write.writing = true
       this.write._waiting.shift()[0]()
     }
